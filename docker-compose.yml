@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  client:
+    build: ./da_admin
+    ports:
+      - 3000:3000
+  server:
+    build: ./da-uni-api
+    ports:
+      - 4000:4000
+    environment:
+      - DB_URL=mongodb://database/da-uni-db
+  database: 
+    image: mongo:4.0-xenial
+    ports:
+      - 27017:27017
+    volumes:
+      - da-uni:/data/db
+volumes:
+  da-uni:
